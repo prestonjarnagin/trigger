@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import {connect } from 'react-redux';
+import { createFood } from '../actions/foodActions';
 
- class FoodForm extends Component {
+class FoodForm extends Component {
    constructor(props) {
      super(props);
      this.state = {
@@ -17,19 +20,13 @@ import React, { Component } from 'react'
 
    onSubmit(event){
      event.preventDefault();
-     const post = {
+
+     const food = {
        title: this.state.title,
        body: this.state.body
      }
-     fetch('https://jsonplaceholder.typicode.com/posts', {
-       method: 'POST',
-       headers: {
-         'content-type': 'application/json'
-       },
-       body: JSON.stringify(post)
-     })
-     .then(response => response.json())
-     .then(data => console.log(data));
+
+     this.props.createFood(food);
    }
   render() {
     return(
@@ -55,4 +52,7 @@ import React, { Component } from 'react'
   }
 }
 
-export default FoodForm;
+FoodForm.propTypes = {
+  createFood: PropTypes.func.isRequired
+}
+export default connect(null, {createFood} )(FoodForm);
