@@ -14,15 +14,19 @@ import { fetchFoods} from '../actions/foodActions';
      }
    }
   render() {
+
     const foodItems = this.props.foods.map(food => (
-      <div key={food.id}>
-        <h3> {food.title} </h3>
-        <h3> {food.body} </h3>
+      <div key={food.id} className="card-container">
+        <div className="name-time-container" >
+          <h3> {food.name} </h3>
+          <h3> {food.body} </h3>
+        </div>
+        <button className="edit-card">...</button>
+        <button className="delete-card">X</button>
       </div>
     ))
     return(
-      <div>
-        <h1> Foods</h1>
+      <div id='day-summary-container'>
         {foodItems}
       </div>
     )
