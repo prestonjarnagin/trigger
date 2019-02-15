@@ -3,7 +3,6 @@ import './App.css';
 import { Provider } from 'react-redux';
 
 import Foods from './components/Foods';
-import FoodForm from './components/FoodForm';
 import * as dateHelper from './helpers/date';
 import homeButton from "./images/home.svg"
 import analyticsButton from "./images/analytics.svg"
