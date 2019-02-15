@@ -69,6 +69,11 @@ h1 {
   max-width: 600px;
   background-color: #9AACB8;
   border-radius: 6px;
+  box-shadow: 5px 5px 5px #888888;
+}
+
+.card-container.reaction {
+  background-color: #60412B;
 }
 
 .name-time-container {
@@ -76,7 +81,7 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
   width: 80%;
-  height: 24px;
+  height: 26px;
   overflow: hidden;
 }
 
@@ -94,15 +99,16 @@ h5 {
 }
 
 .card-container button {
+  margin-left: 12px;
+  width: 24px;
+  height: 24px;
+  font-weight: bolder;
+  font-family: Arial, Helvetica, sans-serif;
   background-color: #DDE2E3; 
   border-radius: 50%;
   border: none; 
-  cursor: pointer;
   outline: none;
-  font-weight: bolder;
-  font-family: Arial, Helvetica, sans-serif;
-  width: 24px;
-  height: 24px;
+  cursor: pointer;
 }
 
 button.edit-card {
