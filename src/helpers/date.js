@@ -20,3 +20,20 @@ export const dateToString = (date) => {
 export const dateStringToUnix = (dateString) => {
   return dateString.getTime() / 1000;
 }
+
+export const unixDateToTime = (unixDate) => {
+  let date = new Date(unixDate * 1000)
+  let hours = date.getHours();
+  let minutes = "0" + date.getMinutes();
+
+  return convert24HourTime(hours, minutes.substr(-2))
+}
+
+function convert24HourTime(hours, minutes) {
+  if (hours > 12) {
+    return (hours - 12) + ":" + minutes + " PM"
+  } else {
+    return hours + ":" + minutes + " AM"
+  }
+}
+
