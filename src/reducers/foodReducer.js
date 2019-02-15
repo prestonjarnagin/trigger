@@ -13,7 +13,7 @@ export default function(state = initialState, action) {
     case NEW_FOOD:
       return {
         ...state,
-        item: action.payload    
+        item: action.payload
       }
 
     default:
