@@ -7,8 +7,9 @@ class FoodForm extends Component {
    constructor(props) {
      super(props);
      this.state = {
-       title: '',
-       body: ''
+       type: 'food',
+       name: '',
+       time: ''
      };
      this.onChange = this.onChange.bind(this);
      this.onSubmit = this.onSubmit.bind(this);
@@ -22,31 +23,45 @@ class FoodForm extends Component {
      event.preventDefault();
 
      const food = {
-       title: this.state.title,
-       body: this.state.body
+       type: this.state.type,
+       name: this.state.name,
+       time: this.state.time
      }
 
      this.props.createFood(food);
    }
   render() {
     return(
-      <div>
-        <form onSubmit={this.onSubmit}>
-          <div>
-            <label>Title: </label> <br/>
-            <input type="text" name="title" value={this.state.title}
-            onChange = {this.onChange}
-            />
+      <div id="food-form-container">
+        <div className="food-form-tabs-container">
+          <div className="food-form-tab add-food-tab">
+            <h4>Add Food</h4>
           </div>
-          <div>
-            <label>Body: </label> <br/>
-            <input type="text" name="body" value={this.state.body}
-            onChange = {this.onChange}
-             />
+          <div className="food-form-tab add-reaction-tab">
+            <h4>Add Reaction</h4>
           </div>
-          <br/>
-          <button type="submit"> Submit </button>
-        </form>
+        </div>
+        <div id="food-form-fields-container">
+          <form onSubmit={this.onSubmit}>
+            <div>
+              <input type="text" 
+                     name="name"
+                     value={this.state.title}
+                     placeholder="Enter Name of Food"
+                     onChange={this.onChange}
+              />
+            </div>
+            <div>
+              <input type="text" 
+                     name="time" 
+                     value={this.state.body}
+                     placeholder="Time"
+                     onChange={this.onChange}
+              />
+              <button type="submit"> Submit </button>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

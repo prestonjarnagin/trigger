@@ -3,6 +3,7 @@ import './App.css';
 import { Provider } from 'react-redux';
 
 import Foods from './components/Foods';
+import FoodForm from './components/FoodForm';
 import * as dateHelper from './helpers/date';
 import homeButton from "./images/home.svg"
 import analyticsButton from "./images/analytics.svg"
@@ -21,6 +22,7 @@ class App extends Component {
             <h2>{dateHelper.defaultDate()}</h2>
           </section>
           <Foods />
+          <FoodForm />
           <footer>
             <img className="home-button" src={homeButton} alt="home button"/>
             <button className="add-button">+</button>
