@@ -40,7 +40,7 @@ class FoodForm extends Component {
           </div>
           <div>
             <label>Body: </label> <br/>
-            <textarea name="body" value={this.state.body}
+            <input type="text" name="body" value={this.state.body}
             onChange = {this.onChange}
              />
           </div>

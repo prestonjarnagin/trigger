@@ -1,33 +1,145 @@
-.App {
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  padding: 9px;
+  width: 100%;
+  height: 36px;
+  background-color: #3C455C;
+}
+
+#calendar-container {
+  position: fixed;
+  top: 54px;
+  padding: 24px 0;
+  width: 100%;
+  height: 48px;
+  background-color: #B37C57;
+}
+
+#day-summary-container {
+  position: fixed;
+  top: 150px;
+  bottom: 60px;
+  width: 100%;
+  padding: 6px 0 36px 0;
+  background-color: #DDE2E3; 
+  overflow: scroll;   
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #60412B;
+}
+
+h1 {
+  color: #FFFFFF;
+  font-size: 28px;
+  margin: 0;
+}
+
+#calendar-container h2 {
+  margin: 0;
+  font-size: 36px;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.card-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 6px;
+  margin: 12px auto;
+  width: calc(100% - 36px);
+  max-width: 600px;
+  background-color: #9AACB8;
+  border-radius: 6px;
+  box-shadow: 5px 5px 5px #888888;
+}
+
+.card-container.reaction {
+  background-color: #60412B;
+}
+
+.name-time-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  height: 26px;
+  overflow: hidden;
+}
+
+h5 {
+  color: #FFFFFF;
+  margin: 6px;
+}
+
+.card-name {
+  width: 75%;
+}
+
+.card-time {
+  width: 25%;
+}
+
+.card-container button {
+  margin-left: 12px;
+  width: 24px;
+  height: 24px;
+  font-weight: bolder;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #DDE2E3; 
+  border-radius: 50%;
+  border: none; 
+  outline: none;
+  cursor: pointer;
+}
+
+button.edit-card {
+  padding-bottom: 6px;
+  font-size: 16px;
+}
+
+button.delete-card {
+  font-size: 20px;
+}
+
+footer {
+  padding: 10px 0;
+}
+
+footer img {
+  width: 48px;
+  height: 48px;
+  margin: 6px;
+  cursor: pointer;
+}
+
+button.add-button {
+  width: 80px;
+  height: 80px;
+  margin-top: -30px;
+  background-color: #B37C57;
+  font-size: 60px;
+  font-weight: bolder;
+  border: solid white 1px;
+  border-radius: 50%;
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  cursor: pointer;
 }

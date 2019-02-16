@@ -1,11 +1,11 @@
 import { FETCH_FOODS, NEW_FOOD } from './types';
 
 export const fetchFoods = () => dispatch =>  {
-  fetch('https://jsonplaceholder.typicode.com/posts')
+  fetch('https://trigger-backend.herokuapp.com/api/v1/day_summary?date=1550030400')
    .then(response => response.json())
    .then(foods => dispatch({
      type: FETCH_FOODS,
-     payload: foods
+     payload: foods.data
    })
  );
 }
