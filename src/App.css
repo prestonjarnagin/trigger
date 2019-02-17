@@ -174,15 +174,20 @@ button.add-button {
   margin: 0;
   text-align: center;
   color: #FFFFFF;
+  background-color: #DDDDDD;
   border-top-left-radius: 12px;
+  cursor: pointer;
 }
 
-.add-food-tab {
+.add-food-tab.selected-tab {
   background-color: #9AACB8;
+  color: #000000;
+  text-decoration: underline;
 }
 
-.add-reaction-tab {
+.add-reaction-tab.selected-tab {
   background-color: #60412B;
+  text-decoration: underline;
 }
 
 h4 {
@@ -219,4 +224,14 @@ h4 {
   color: #FFFFFF;
   font-size: 24px;
   font-weight: bold;
+}
+
+#food-form-response-container {
+  position: relative;
+  top: -180px;
+  padding: 24px;
+  height: 132px;
+  color: #FFFFFF;
+  background-color: #B37C57;
+  visibility: hidden;
 }
