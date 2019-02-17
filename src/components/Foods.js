@@ -8,6 +8,14 @@ import { fetchFoods} from '../actions/foodActions';
      this.props.fetchFoods();
    }
 
+  // == this will work when Foods action payload includes a food ==  
+   componentWillReceiveProps(nextProps) {
+     if (nextProps.newFood) {
+       console.log(nextProps.newFood, this.props.foods)
+      //  this.props.foods.push(nextProps.newFood);
+     }
+   }
+
   render() {
 
       const foodItems = this.props.foods.map(food => (
