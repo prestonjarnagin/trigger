@@ -27,7 +27,6 @@ class FoodForm extends Component {
        name: this.state.name,
        time: this.state.time
      }
-
      this.props.createFood(food);
    }
   render() {
@@ -44,7 +43,7 @@ class FoodForm extends Component {
         <div id="food-form-fields-container">
           <form onSubmit={this.onSubmit}>
             <div>
-              <input type="text" 
+              <input type="text"
                      name="name"
                      value={this.state.title}
                      placeholder="Enter Name of Food"
@@ -52,8 +51,8 @@ class FoodForm extends Component {
               />
             </div>
             <div>
-              <input type="text" 
-                     name="time" 
+              <input type="text"
+                     name="time"
                      value={this.state.body}
                      placeholder="Time"
                      onChange={this.onChange}

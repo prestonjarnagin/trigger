@@ -11,17 +11,28 @@ export const fetchFoods = () => dispatch =>  {
 }
 
 export const createFood = (foodData) => dispatch => {
-  fetch('https://jsonplaceholder.typicode.com/posts', {
+  const foodInfo = foodData
+  fetch('https://trigger-backend.herokuapp.com/api/v1/foods', {
     method: 'POST',
     headers: {
       'content-type': 'application/json'
     },
-    body: JSON.stringify(foodData)
+    body: JSON.stringify(foodInfo)
   })
+    .then(response => response.json())
+      .then(response => {
+        fetch('https://trigger-backend.herokuapp.com/api/v1/food_entries/', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({ food_id: response.id, time: foodInfo.time })
+        })
+      })
     .then(response => response.json())
     .then(food => dispatch({
       type: NEW_FOOD,
-      payload: food
+      payload: food.status
     })
   );
 

@@ -2,25 +2,24 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchFoods} from '../actions/foodActions';
-import * as dateHelper from '../helpers/date';
 
  class Foods extends Component {
    componentWillMount() {
      this.props.fetchFoods();
    }
 
-   componentWillReceiveProps(nextProps) {
-     if(nextProps.newFood) {
-       this.props.foods.push(nextProps.newFood);
-     }
-   }
+   // componentWillReceiveProps(nextProps) {
+   //   if(nextProps.newFood) {
+   //     this.props.foods.push(nextProps);
+   //   }
+   // }
   render() {
 
       const foodItems = this.props.foods.map(food => (
         <div key={[food.id, food.attributes.type]} className={"card-container " + food.attributes.type} >
-          <div className="name-time-container {food.attributes.type}" >
+          <div className="name-time-container" >
             <h5 className="card-name"> {food.attributes.name} </h5>
-            <h5 className="card-time"> {dateHelper.unixDateToTime(food.attributes.time)} </h5>
+            <h5 className="card-time"> {food.attributes.time} </h5>
           </div>
           <button className="edit-card">...</button>
           <button className="delete-card">X</button>
