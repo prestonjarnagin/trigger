@@ -8,6 +8,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.App {
+  position: relative;
+}
+
 header {
   position: fixed;
   top: 0;
@@ -35,6 +39,18 @@ header {
   background-color: #DDE2E3; 
   overflow: scroll;   
 }
+
+#food-form-container {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  margin: 0 auto 0 -45%;
+  width: calc(90% - 36px);
+  height: 280px;
+  background-color: #FFFFFF;
+  border-radius: 12px 12px 0 0;
+  padding: 18px 18px 0 18px;
+  }
 
 footer {
   display: flex;
@@ -142,4 +158,63 @@ button.add-button {
   border-radius: 50%;
   color: white;
   cursor: pointer;
+}
+
+.food-form-tabs-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.food-form-tab {
+  width: 50%;
+  height: 40px;
+  padding: 10px;
+  margin: 0;
+  text-align: center;
+  color: #FFFFFF;
+  border-top-left-radius: 12px;
+}
+
+.add-food-tab {
+  background-color: #9AACB8;
+}
+
+.add-reaction-tab {
+  background-color: #60412B;
+}
+
+h4 {
+  margin: 10px;
+  font-size: 16px;
+}
+
+#food-form-fields-container {
+  background-color: #B37C57;
+  padding: 24px;
+}
+
+#food-form-fields-container input {
+  width: 50%;
+  height: 48px;
+  font-size: 24px;
+  text-align: center;
+}
+
+#food-form-fields-container input::placeholder {
+  font-size: 24px;
+}
+
+#food-form-fields-container input[name=name] {
+  width: 100%;
+  margin: 0 0 24px 0;
+}
+
+#food-form-fields-container button {
+  margin: 0 0 0 24px;
+  width: calc(50% - 30px);
+  height: 54px;
+  background-color: #3C455C;
+  color: #FFFFFF;
+  font-size: 24px;
+  font-weight: bold;
 }

@@ -11,7 +11,7 @@ export const fetchFoods = () => dispatch =>  {
 }
 
 export const createFood = (foodData) => dispatch => {
-  fetch('https://jsonplaceholder.typicode.com/posts', {
+  fetch('https://trigger-backend.herokuapp.com/api/v1/foods', {
     method: 'POST',
     headers: {
       'content-type': 'application/json'
@@ -19,10 +19,26 @@ export const createFood = (foodData) => dispatch => {
     body: JSON.stringify(foodData)
   })
     .then(response => response.json())
-    .then(food => dispatch({
-      type: NEW_FOOD,
-      payload: food
-    })
+      .then(response => {
+        if (foodData.time !== "") {
+          fetch('https://trigger-backend.herokuapp.com/api/v1/food_entries/', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify({ food_id: response.id, time: foodData.time })
+          })
+          .then(response => response.json())
+          return response
+        }
+        else {
+          return response
+        }
+      })
+      .then(food => dispatch({
+        type: NEW_FOOD,
+        payload: food
+      })
   );
 
  }
