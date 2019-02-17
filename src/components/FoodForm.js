@@ -1,37 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { createFood } from '../actions/foodActions';
 
 class FoodForm extends Component {
-   constructor(props) {
-     super(props);
-     this.state = {
-       type: 'food',
-       name: '',
-       time: ''
-     };
-     this.onChange = this.onChange.bind(this);
-     this.onSubmit = this.onSubmit.bind(this);
-   }
+  constructor(props) {
+    super(props);
+    this.state = {
+      type: 'food',
+      name: '',
+      time: ''
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.formContainer = React.createRef();
+  }
 
-   onChange(event) {
-     this.setState({ [event.target.name]: event.target.value });
-   }
+  componentDidUpdate() {
+    this.toggleDisplay()
+  }
 
-   onSubmit(event){
-     event.preventDefault();
+  toggleDisplay() {
+    this.props.displayAddForm ?
+      this.formContainer.current.style.bottom = "60px" : 
+      this.formContainer.current.style.bottom = "-280px"
+  }
 
-     const food = {
-       type: this.state.type,
-       name: this.state.name,
-       time: this.state.time
-     }
-     this.props.createFood(food);
-   }
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+
+    const food = {
+      type: this.state.type,
+      name: this.state.name,
+      time: this.state.time
+    }
+    this.props.createFood(food);
+  }
+
   render() {
     return(
-      <div id="food-form-container">
+      <div id="food-form-container" ref={this.formContainer}>
         <div className="food-form-tabs-container">
           <div className="food-form-tab add-food-tab">
             <h4>Add Food</h4>
@@ -69,4 +81,8 @@ class FoodForm extends Component {
 FoodForm.propTypes = {
   createFood: PropTypes.func.isRequired
 }
-export default connect(null, {createFood} )(FoodForm);
+const mapStateToProps = state => ({
+  displayAddForm: state.foodForm.display,
+});
+
+export default connect(mapStateToProps, {createFood} )(FoodForm);
