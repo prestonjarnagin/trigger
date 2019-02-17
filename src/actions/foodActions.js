@@ -1,4 +1,5 @@
 import { FETCH_FOODS, NEW_FOOD } from './types';
+import * as dateHelper from '../helpers/date';
 
 export const fetchFoods = () => dispatch =>  {
   fetch('https://trigger-backend.herokuapp.com/api/v1/day_summary?date=1550030400')
@@ -29,13 +30,18 @@ export const createFood = (foodData) => dispatch => {
             headers: {
               'content-type': 'application/json'
             },
-            body: JSON.stringify({ [`${foodData.type}_id`]: response.id, time: foodData.time })
+            body: JSON.stringify({
+              [`${foodData.type}_id`]: response.id,
+              time: dateHelper.hoursToUnixTime(foodData.time)
+            })
           })
           .then(response => response.json())
           foodData.id = response.id
+          foodData.status = response.status
         }
         else {
           foodData.id = response.id
+          foodData.status = response.status
         }
       })
       .then(food => dispatch({  // so food here is only a status...
@@ -45,15 +51,3 @@ export const createFood = (foodData) => dispatch => {
   );
 
  }
-
-// We either need build a food object like this:
-// payload: {
-//   id: response.id,
-//   type: foodData.type,
-//   name: foodData.name,
-//   time: foodData.time
-// }
-
-// or we need to ask BE to return the food_entry/reaction_entry in the response and send it as the payload
-
-// for the time being, I prefer the first option
