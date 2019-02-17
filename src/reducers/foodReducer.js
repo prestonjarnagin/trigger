@@ -1,4 +1,4 @@
-import { FETCH_FOODS, NEW_FOOD } from '../actions/types'
+import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD } from '../actions/types'
 const initialState = {
   items: [],
   item: {}
@@ -15,6 +15,10 @@ export default function(state = initialState, action) {
         ...state,
         item: action.payload
       }
+    case DESTROY_FOOD:
+      return state.filter(food => {
+        return food.id !== action.payload;
+      })
 
     default:
      return state;

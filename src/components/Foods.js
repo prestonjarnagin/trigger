@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchFoods} from '../actions/foodActions';
+import { fetchFoods, destroyFood } from '../actions/foodActions';
 import * as dateHelper from '../helpers/date';
 import deleteButton from "../images/delete.svg";
 import editButton from "../images/edit.svg";
@@ -50,10 +50,12 @@ class Foods extends Component {
     let card = event.target.parentNode.parentNode.parentNode.parentNode;
     let type = card.id.split("-")[0]
     let id = card.id.split("-")[2]
+    let foodData = {
+      id: id,
+      type: type
+    }
 
-    // add fetch and update state here
-    console.log(type, id);
-    // cancelDelete after fetch and render to close the dialog
+    this.props.destroyFood(foodData);
     this.cancelDelete(event);
   }
 
@@ -123,4 +125,4 @@ const mapStateToProps = state => ({
   newFood: state.foods.item
 });
 
-export default connect(mapStateToProps, { fetchFoods })(Foods);
+export default connect(mapStateToProps, { fetchFoods, destroyFood })(Foods);

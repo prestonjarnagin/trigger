@@ -1,4 +1,4 @@
-import { FETCH_FOODS, NEW_FOOD } from './types';
+import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD } from './types';
 
 
 export const fetchFoods = () => dispatch =>  {
@@ -59,4 +59,19 @@ const foodEntryPost = (response, foodData) => {
 const chanceFoodData = (response, foodData) => { // this method is only updating the status of the foodData variable
   foodData.id = response.id
   foodData.status = response.status
+}
+
+export const destroyFood = (foodData) => dispatch => {
+  let url = `https://trigger-backend.herokuapp.com/api/v1/${foodData.type}_entries/${foodData.id}`
+  fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(food => dispatch({
+      type: DESTROY_FOOD,
+      payload: foodData.id
+    }));
 }

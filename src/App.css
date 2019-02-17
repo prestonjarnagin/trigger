@@ -143,6 +143,7 @@ h5 {
   margin: 0 6px;
   border-radius: 50%;
   box-shadow: 3px 3px 3px #333333;
+  cursor: pointer;
 }
 
 footer {
