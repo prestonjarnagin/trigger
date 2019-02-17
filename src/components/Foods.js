@@ -8,11 +8,6 @@ import { fetchFoods} from '../actions/foodActions';
      this.props.fetchFoods();
    }
 
-   // componentWillReceiveProps(nextProps) {
-   //   if(nextProps.newFood) {
-   //     this.props.foods.push(nextProps);
-   //   }
-   // }
   render() {
 
       const foodItems = this.props.foods.map(food => (
