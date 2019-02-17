@@ -9,6 +9,13 @@ import * as dateHelper from '../helpers/date'
      this.props.fetchFoods();
    }
 
+   componentWillReceiveProps(nextProps) {
+   if(nextProps.newFood &&
+     (nextProps.newFood.time >= dateHelper.dateRange.begin) &&
+     ( nextProps.newFood.time <= dateHelper.dateRange.end) ) {
+     this.props.foods.push(nextProps.newFood);
+   }
+  }
   render() {
 
       const foodItems = this.props.foods.map(food => (

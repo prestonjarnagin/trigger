@@ -1,5 +1,5 @@
 import { FETCH_FOODS, NEW_FOOD } from './types';
-import * as dateHelper from '../helpers/date';
+
 
 export const fetchFoods = () => dispatch =>  {
   fetch('https://trigger-backend.herokuapp.com/api/v1/day_summary?date=1550030400')
@@ -32,7 +32,7 @@ export const createFood = (foodData) => dispatch => {
             },
             body: JSON.stringify({
               [`${foodData.type}_id`]: response.id,
-              time: dateHelper.hoursToUnixTime(foodData.time)
+              time: foodData.time
             })
           })
           .then(response => response.json())

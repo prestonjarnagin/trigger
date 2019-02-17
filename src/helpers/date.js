@@ -6,6 +6,12 @@ export const defaultDate = () => {
   return date;
 }
 
+export const dateRange = () => {
+  let begin = Date.parse(defaultDate) / 1000;
+  let end = begin + 86400;
+  return {begin: begin, end: end};
+}
+
 export const dateToString = (date) => {
   let month = '' + (date.getMonth() + 1);
   let day = '' + date.getDate();

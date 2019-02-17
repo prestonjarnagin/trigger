@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createFood } from '../actions/foodActions';
+import * as dateHelper from '../helpers/date';
 
 class FoodForm extends Component {
   constructor(props) {
@@ -9,7 +10,9 @@ class FoodForm extends Component {
     this.state = {
       type: 'food',
       name: '',
-      time: ''
+      time: '',
+      id: 0,
+      status: ''
       };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -26,7 +29,9 @@ class FoodForm extends Component {
       this.setState({
         type: 'food',
         name: '',
-        time: ''
+        time: '',
+        id: 0,
+        status: ''
       })
     }
   }
@@ -63,10 +68,10 @@ class FoodForm extends Component {
     const food = {
       type: this.state.type,
       name: this.state.name,
-      time: this.state.time  // need to add a date helper function to convert simple time to Unix
+      time: dateHelper.hoursToUnixTime(this.state.time)
     }
     this.props.createFood(food);
-    this.renderResponse(this.props.foodResponse); // this doesn't work because createFood is async, need to implement async/await?  
+    // this.renderResponse(this.props.foodResponse); // this doesn't work because createFood is async, need to implement async/await?
   }
 
   renderResponse(response) {
@@ -89,11 +94,11 @@ class FoodForm extends Component {
     return(
       <div id="food-form-container" ref={this.formContainer}>
         <div className="food-form-tabs-container">
-          <div className={"food-form-tab add-food-tab " + selectedTab("food")} 
+          <div className={"food-form-tab add-food-tab " + selectedTab("food")}
                onClick={this.addFood}>
             <h4>Add Food</h4>
           </div>
-          <div className={"food-form-tab add-reaction-tab " + selectedTab("reaction")} 
+          <div className={"food-form-tab add-reaction-tab " + selectedTab("reaction")}
                onClick={this.addReaction}>
             <h4>Add Reaction</h4>
           </div>
