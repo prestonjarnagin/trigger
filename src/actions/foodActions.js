@@ -32,10 +32,10 @@ export const createFood = (foodData) => dispatch => {
             body: JSON.stringify({ [`${foodData.type}_id`]: response.id, time: foodData.time })
           })
           .then(response => response.json())
-          return response  // this is only returning a status...
+          foodData.id = response.id
         }
         else {
-          return response
+          foodData.id = response.id
         }
       })
       .then(food => dispatch({  // so food here is only a status...
@@ -46,7 +46,7 @@ export const createFood = (foodData) => dispatch => {
 
  }
 
-// We either need build a food object like this: 
+// We either need build a food object like this:
 // payload: {
 //   id: response.id,
 //   type: foodData.type,
