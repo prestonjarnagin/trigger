@@ -70,8 +70,11 @@ export const destroyFood = (foodData) => dispatch => {
     }
   })
     .then(response => response.json())
-    .then(food => dispatch({
+    .then(response => dispatch({
       type: DESTROY_FOOD,
-      payload: foodData.id
+      payload: {
+        id: foodData.id,
+        status: response.status
+      }
     }));
 }

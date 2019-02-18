@@ -16,9 +16,13 @@ export default function(state = initialState, action) {
         item: action.payload
       }
     case DESTROY_FOOD:
-      return state.filter(food => {
+      const newState = state.filter(food => {
         return food.id !== action.payload;
       })
+      return {
+        ...newState,
+        deletedItem: action.payload
+      }
 
     default:
      return state;
