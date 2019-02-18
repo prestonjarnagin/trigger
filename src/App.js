@@ -4,9 +4,8 @@ import { Provider } from 'react-redux';
 
 import Foods from './components/Foods';
 import FoodForm from './components/FoodForm';
+import Nav from './components/Nav';
 import * as dateHelper from './helpers/date';
-import homeButton from "./images/home.svg"
-import analyticsButton from "./images/analytics.svg"
 
 import store from './store';
 class App extends Component {
@@ -23,11 +22,7 @@ class App extends Component {
           </section>
           <Foods />
           <FoodForm />
-          <footer>
-            <img className="home-button" src={homeButton} alt="home button"/>
-            <button className="add-button">+</button>
-            <img className="analytics-button" src={analyticsButton} alt="analytics button" />
-          </footer>
+          <Nav />
         </div>
       </Provider>
     );
