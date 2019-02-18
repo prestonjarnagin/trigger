@@ -1,3 +1,4 @@
+import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD } from '../../actions/types'
 import foodReducer from '../../reducers/foodReducer'
 
 describe('Food Reducer test', () => {
@@ -7,5 +8,14 @@ describe('Food Reducer test', () => {
         item: {},
         changedItem: {}
     })
+  })
+
+  it('should return and food/reaction item', () => {
+    let food = { id: "68",
+                type: "food",
+                name: "Peas"
+              }
+    expect(foodReducer(undefined, {type: NEW_FOOD}))
+
   })
 })
