@@ -31,9 +31,16 @@ class FoodForm extends Component {
     this.toggleDisplay();
   }
 
+  resetState() {
+    this.setState({
+      type: 'food',
+      name: '',
+      time: ''
+    })
+  }
+
   toggleDisplay() {
     if(this.props.displayAddForm) {
-      // this.clearFields();
       this.formContainer.current.style.bottom = "60px";
     } else {
       this.formContainer.current.style.bottom = "-280px";
@@ -42,11 +49,6 @@ class FoodForm extends Component {
         this.responseContainer.current.style.visibility = "hidden";
       }, 500);
     }
-  }
-
-  clearFields() {
-    this.foodName.current.value = ""
-    this.foodTime.current.value = ""
   }
 
   addFood() {
@@ -71,6 +73,7 @@ class FoodForm extends Component {
     }
     this.props.createFood(food);
     this.renderResponse(this.props.foodResponse);
+    this.resetState();
   }
 
   renderResponse(response) {
