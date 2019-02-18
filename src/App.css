@@ -98,6 +98,15 @@ h1 {
   background-color: #60412B;
 }
 
+.card-container.status {
+  display: none;
+  background-color: #3C455C;
+}
+
+#foods-status {
+  text-align: center;
+}
+
 .name-time-container {
   display: flex;
   flex-direction: row;

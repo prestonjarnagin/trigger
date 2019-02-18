@@ -69,12 +69,23 @@ export const destroyFood = (foodData) => dispatch => {
       'content-type': 'application/json'
     }
   })
-    .then(response => response.json())
-    .then(response => dispatch({
-      type: DESTROY_FOOD,
-      payload: {
-        id: foodData.id,
-        status: response.status
+    .then(response => {
+      if(response.ok) {
+        dispatch({
+          type: DESTROY_FOOD,
+          payload: {
+            id: foodData.id,
+            status: `Successfully deleted ${foodData.name} ${foodData.type} entry .`
+          }
+        })
+      } else {
+        dispatch({
+          type: DESTROY_FOOD,
+          payload: {
+            id: foodData.id,
+            status: `Something went wrong.  Unable to delete ${foodData.name} ${foodData.type} entry .`
+          }
+        })
       }
-    }));
+    });
 }

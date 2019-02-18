@@ -12,6 +12,8 @@ class Foods extends Component {
     this.deleteDialog = this.deleteDialog.bind(this);
     this.cancelDelete = this.cancelDelete.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this);
+    this.foodsContainer = React.createRef();
+    this.statusMessage = React.createRef();
   }
 
   componentWillMount() {
@@ -19,7 +21,9 @@ class Foods extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.newFood) {
+    if (nextProps.newFood &&
+      (nextProps.newFood.time >= dateHelper.dateRange.begin) &&
+      (nextProps.newFood.time <= dateHelper.dateRange.end)) {
       this.props.foods.push(nextProps.newFood);
     }
   }
@@ -50,22 +54,18 @@ class Foods extends Component {
     let card = event.target.parentNode.parentNode.parentNode.parentNode;
     let type = card.id.split("-")[0]
     let id = card.id.split("-")[2]
+    let name = card.querySelector(".card-name").innerText;
     let foodData = {
       id: id,
-      type: type
+      type: type,
+      name: name
     }
 
     this.props.destroyFood(foodData);
-    this.cancelDelete(event);
+    this.foodsContainer.current.scrollTop = 0;
+    this.statusMessage.current.style.display = "block";
   }
 
-   componentWillReceiveProps(nextProps) {
-   if(nextProps.newFood &&
-     (nextProps.newFood.time >= dateHelper.dateRange.begin) &&
-     ( nextProps.newFood.time <= dateHelper.dateRange.end) ) {
-     this.props.foods.push(nextProps.newFood);
-   }
-  }
   render() {
 
     const foodItems = this.props.foods.map(food => (
@@ -107,7 +107,10 @@ class Foods extends Component {
     ))
 
     return(
-      <div id='day-summary-container'>
+      <div id="day-summary-container" ref={this.foodsContainer}>
+        <div className="card-container status" ref={this.statusMessage}>
+          <h5 id="foods-status">{this.props.status}</h5>
+        </div>
         {foodItems}
       </div>
     )
@@ -116,13 +119,16 @@ class Foods extends Component {
 
 Foods.propTypes = {
   fetchFoods: PropTypes.func.isRequired,
+  destroyFood: PropTypes.func.isRequired,
   foods: PropTypes.array.isRequired,
-  newFood: PropTypes.object
+  newFood: PropTypes.object,
+  status: PropTypes.string
 }
 
 const mapStateToProps = state => ({
   foods: state.foods.items,
-  newFood: state.foods.item
+  newFood: state.foods.item,
+  status: state.foods.changedItem.status
 });
 
 export default connect(mapStateToProps, { fetchFoods, destroyFood })(Foods);
