@@ -275,6 +275,11 @@ h4 {
   visibility: hidden;
 }
 
+h3.close-form {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .delete-dialog-container {
   display: none;
   flex-direction: row;

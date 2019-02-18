@@ -15,6 +15,12 @@ class Nav extends Component {
     this.addForm = React.createRef();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.displayAddForm !== this.props.displayAddForm) {
+      this.addFormBackground();
+    }
+  }
+
   displayAddForm = () => {
     this.addFormBackground();
     this.props.toggleDisplayAddForm()
