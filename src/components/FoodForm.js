@@ -11,7 +11,6 @@ class FoodForm extends Component {
       type: 'food',
       name: '',
       time: '',
-      id: 0,
       status: ''
       };
     this.onChange = this.onChange.bind(this);
@@ -30,7 +29,6 @@ class FoodForm extends Component {
         type: 'food',
         name: '',
         time: '',
-        id: 0,
         status: ''
       })
     }
@@ -71,7 +69,7 @@ class FoodForm extends Component {
       time: dateHelper.hoursToUnixTime(this.state.time)
     }
     this.props.createFood(food);
-    // this.renderResponse(this.props.foodResponse); // this doesn't work because createFood is async, need to implement async/await?
+    // this.renderResponse(this.props.foodResponse);
   }
 
   renderResponse(response) {
@@ -134,8 +132,11 @@ class FoodForm extends Component {
 }
 
 FoodForm.propTypes = {
-  createFood: PropTypes.func.isRequired
+  createFood: PropTypes.func.isRequired,
+  displayAddForm: PropTypes.bool,
+  foodResponse: PropTypes.string
 }
+
 const mapStateToProps = state => ({
   displayAddForm: state.foodForm.display,
   foodResponse: state.foods.item.status
