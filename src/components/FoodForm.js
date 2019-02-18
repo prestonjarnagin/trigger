@@ -21,31 +21,29 @@ class FoodForm extends Component {
     this.formContainer = React.createRef();
     this.fieldsContainer = React.createRef();
     this.responseContainer = React.createRef();
+    this.foodName = React.createRef();
+    this.foodTime = React.createRef();
   }
 
-  componentWillUpdate() {
-    if (this.props.displayAddForm === false) {
-      this.setState({
-        type: 'food',
-        name: '',
-        time: '',
-        status: ''
-      })
-    }
-  }
-
+  // change this to will receive props, compare displayAddForm
   componentDidUpdate() {
-    this.toggleDisplay()
+    this.toggleDisplay();
   }
 
   toggleDisplay() {
     if(this.props.displayAddForm) {
+      // this.clearFields();
       this.formContainer.current.style.bottom = "60px";
     } else {
       this.formContainer.current.style.bottom = "-280px";
       this.fieldsContainer.current.style.visibility = "visible";
       this.responseContainer.current.style.visibility = "hidden";
     }
+  }
+
+  clearFields() {
+    this.foodName.current.value = ""
+    this.foodTime.current.value = ""
   }
 
   addFood() {
@@ -66,7 +64,7 @@ class FoodForm extends Component {
     const food = {
       type: this.state.type,
       name: this.state.name,
-      time: dateHelper.hoursToUnixTime(this.state.time)
+      time: dateHelper.hoursToUnixTime(this.state.time, this.props.unixDate)
     }
     this.props.createFood(food);
     // this.renderResponse(this.props.foodResponse);
@@ -107,6 +105,7 @@ class FoodForm extends Component {
               <input type="text"
                      name="name"
                      value={this.state.name}
+                     ref={this.foodName}
                      placeholder={namePlaceholder()}
                      onChange={this.onChange}
               />
@@ -115,6 +114,7 @@ class FoodForm extends Component {
               <input type="text"
                      name="time"
                      value={this.state.time}
+                     ref={this.foodTime}
                      placeholder="Enter Time"
                      onChange={this.onChange}
               />
@@ -134,12 +134,14 @@ class FoodForm extends Component {
 FoodForm.propTypes = {
   createFood: PropTypes.func.isRequired,
   displayAddForm: PropTypes.bool,
-  foodResponse: PropTypes.string
+  foodResponse: PropTypes.string,
+  unixDate: PropTypes.number,
 }
 
 const mapStateToProps = state => ({
   displayAddForm: state.foodForm.display,
-  foodResponse: state.foods.item.status
+  foodResponse: state.foods.item.status,
+  unixDate: state.calendar.unixDate
 });
 
 export default connect(mapStateToProps, {createFood} )(FoodForm);

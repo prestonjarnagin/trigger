@@ -1,8 +1,8 @@
 import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD } from './types';
 
 
-export const fetchFoods = () => dispatch =>  {
-  fetch('https://trigger-backend.herokuapp.com/api/v1/day_summary?date=1550030400')
+export const fetchFoods = (date) => dispatch =>  {
+  fetch(`https://trigger-backend.herokuapp.com/api/v1/day_summary?date=${date}`)
    .then(response => response.json())
    .then(foods => dispatch({
      type: FETCH_FOODS,
@@ -14,29 +14,29 @@ export const fetchFoods = () => dispatch =>  {
 export const createFood = (foodData) => dispatch => {
   let foodUrl = `https://trigger-backend.herokuapp.com/api/v1/${foodData.type}s`
 
-  fetch(foodUrl, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify(foodData)
+fetch(foodUrl, {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json'
+  },
+  body: JSON.stringify(foodData)
+})
+  .then(response => response.json())
+  .then(response => {
+    if (foodData.time !== "") {
+      foodEntryPost(response, foodData)
+      chanceFoodData(response, foodData)
+      return foodData
+    }
+    else {
+      chanceFoodData(response, foodData)
+      return foodData
+    }
   })
-    .then(response => response.json())
-      .then(response => {
-        if (foodData.time !== "") {
-          foodEntryPost(response, foodData)
-          chanceFoodData(response, foodData)
-          return foodData
-        }
-        else {
-          chanceFoodData(response, foodData)
-          return foodData
-        }
-      })
-      .then(food => dispatch({
-        type: NEW_FOOD,
-        payload: food
-      })
+  .then(food => dispatch({
+    type: NEW_FOOD,
+    payload: food
+  })
   );
  }
 

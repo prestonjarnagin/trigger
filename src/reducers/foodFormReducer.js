@@ -5,10 +5,10 @@ const initialState = {
 }
 
 const foodFormReducer = (state = initialState, action) => {
-  let copyState = state
+  let newState = state
   switch (action.type) {
     case DISPLAY_ADD_FORM:
-      return {display: !copyState.display}
+      return {display: !newState.display}
     default:
       return state;
   }
