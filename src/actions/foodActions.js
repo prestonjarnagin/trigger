@@ -1,5 +1,5 @@
 import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD } from './types';
-
+import * as dateHelper from '../helpers/date';
 
 export const fetchFoods = (date) => dispatch =>  {
   fetch(`https://trigger-backend.herokuapp.com/api/v1/day_summary?date=${date}`)
@@ -25,7 +25,7 @@ fetch(foodUrl, {
   .then(response => {
     if (foodData.time !== "") {
       foodEntryPost(response, foodData)
-      chanceFoodData(response, foodData)
+      createEntry(response, foodData)
       return foodData
     }
     else {
@@ -59,6 +59,13 @@ const foodEntryPost = (response, foodData) => {
 const chanceFoodData = (response, foodData) => { // this method is only updating the status of the foodData variable
   foodData.id = response.id
   foodData.status = response.status
+}
+
+const createEntry = (response, foodData) => {
+  if (response.status === `${foodData.name} is a duplicate`) {
+    response.status = `Created entry for ${foodData.name} at ${dateHelper.unixDateToTime(foodData.time)}`
+  }
+  chanceFoodData(response, foodData)
 }
 
 export const destroyFood = (foodData) => dispatch => {

@@ -15,4 +15,3 @@ const foodFormReducer = (state = initialState, action) => {
 };
 
 export default foodFormReducer;
-

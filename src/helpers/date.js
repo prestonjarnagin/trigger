@@ -4,7 +4,7 @@ export const unixToDate = (unixDate) => {
   let date = month + " " + parseDate.getDate() + ", " + parseDate.getFullYear();
 
   return date;
-}   
+}
 
 export const unixDateToTime = (unixDate) => {
   let date = new Date(unixDate * 1000)
@@ -28,7 +28,6 @@ export const hoursToUnixTime = (hourString, selectedDate) => {
   let halfDay = trimTime.slice(-2).toLowerCase();
   let minutes = parseInt(trimTime.slice(count-4, count-2));
   let hours = convertHours(trimTime, count, halfDay);
-  // let unixTime = (Date.parse(defaultDate()) /1000 ) + (hours * 3600) + ( minutes * 60);
   let unixTime = selectedDate + (hours * 3600) + ( minutes * 60);
 
   return unixTime;
