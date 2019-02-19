@@ -24,8 +24,7 @@ class Foods extends Component {
     if (nextProps.newFood &&
       (nextProps.newFood.time >= this.props.unixDate) &&
       (nextProps.newFood.time < this.props.unixDate + 86400)) {
-        console.log(nextProps)
-      // this.props.foods.push(nextProps.newFood);
+      this.props.foods.push(nextProps.newFood);
     } else if (this.props.unixDate !== nextProps.unixDate) {
       this.props.fetchFoods(nextProps.unixDate);
     }

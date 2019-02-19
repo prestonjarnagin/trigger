@@ -6,6 +6,30 @@ export const unixToDate = (unixDate) => {
   return date;
 }
 
+const daysOfWeek = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"]
+
+export const unixToDateArray = (unixDate) => {
+  let parseDate = new Date(unixDate * 1000)
+  let prevDate = new Date((unixDate - 86400) * 1000 )
+  let nextDate = new Date((unixDate + 86400) * 1000 )
+  let currDate = parseDate.getDate();
+
+  return {
+    prevDate: {
+      date: prevDate.getDate(),
+      day: daysOfWeek[prevDate.getDay()]
+    },
+    currDate: {
+      date: currDate,
+      day: daysOfWeek[parseDate.getDay()]
+    },
+    nextDate: {
+      date: nextDate.getDate(),
+      day: daysOfWeek[nextDate.getDay()]
+    }
+  }
+}
+
 export const unixDateToTime = (unixDate) => {
   let date = new Date(unixDate * 1000)
   let hours = date.getHours();
@@ -45,3 +69,4 @@ function convertHours(trimTime, count, halfDay) {
 
   return hours
 }
+
