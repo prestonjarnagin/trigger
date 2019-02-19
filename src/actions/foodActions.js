@@ -1,4 +1,4 @@
-import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD } from './types';
+import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD, UPDATE_FOOD_ENTRY } from './types';
 import * as dateHelper from '../helpers/date';
 
 export const fetchFoods = (date) => dispatch =>  {
@@ -14,34 +14,34 @@ export const fetchFoods = (date) => dispatch =>  {
 export const createFood = (foodData) => dispatch => {
   let foodUrl = `https://trigger-backend.herokuapp.com/api/v1/${foodData.type}s`
 
-fetch(foodUrl, {
-  method: 'POST',
-  headers: { 'content-type': 'application/json' },
-  body: JSON.stringify(foodData)
-})
-  .then(response => response.json())
-  .then(json => {
-    if (!isNaN(foodData.time)) {
-      foodEntryPost(json, foodData)
-      addStatus(json, foodData)
-      return foodData
-    }
-    else {
-      updateFoodData(json, foodData)
-      return foodData
-    }
+  fetch(foodUrl, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(foodData)
   })
-  .then(food => dispatch({
-    type: NEW_FOOD,
-    payload: food
-  }))
-  .catch(error => dispatch({
-    type: NEW_FOOD,
-    payload: {
-      status: `Something went wrong. ${foodData.name} couldn't be created.`
-    }
-  }))
- }
+    .then(response => response.json())
+    .then(json => {
+      if (!isNaN(foodData.time)) {
+        foodEntryPost(json, foodData)
+        addStatus(json, foodData)
+        return foodData
+      }
+      else {
+        updateFoodData(json, foodData)
+        return foodData
+      }
+    })
+    .then(food => dispatch({
+      type: NEW_FOOD,
+      payload: food
+    }))
+    .catch(error => dispatch({
+      type: NEW_FOOD,
+      payload: {
+        status: `Something went wrong. ${foodData.name} couldn't be created.`
+      }
+    }))
+}
 
 const foodEntryPost = (response, foodData) => {
   let foodEntryUrl = `https://trigger-backend.herokuapp.com/api/v1/${foodData.type}_entries`
@@ -57,6 +57,32 @@ const foodEntryPost = (response, foodData) => {
     })
   })
   .then(response => response.json())
+}
+
+export const updateFoodEntry = (foodData) => dispatch => {
+  let url = `https://trigger-backend.herokuapp.com/api/v1/${foodData.type}_entries`
+
+  fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      [`${foodData.type}_id`]: foodData.id,
+      name: foodData.name,
+      time: foodData.time
+    })
+  })
+    .then(response => response.json())
+    .then(response => {
+      foodData.status = response.status;
+      return foodData 
+    })
+    .then(food => console.log(food))
+    .then(food => dispatch({
+      type: UPDATE_FOOD_ENTRY,
+      payload: food
+    }))
 }
 
 const updateFoodData = (response, foodData) => { 

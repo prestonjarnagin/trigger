@@ -5,4 +5,4 @@ export const DESTROY_FOOD = 'DESTROY_FOOD';
 export const CHANGE_DATE = 'CHANGE_DATE';
 export const INCREMENT_DATE = 'INCREMENT_DATE';
 export const DECREMENT_DATE = 'DECREMENT_DATE';
-
+export const UPDATE_FOOD_ENTRY = 'UPDATE_FOOD';
