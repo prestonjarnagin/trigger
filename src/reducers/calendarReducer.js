@@ -9,7 +9,6 @@ const currentDate = () => {
 
 const initialState = {
   unixDate: currentDate(),
-  displayDate: dateHelper.unixToDate(currentDate())
 }
 
 const calendarReducer = (state = initialState, action) => {
@@ -18,19 +17,16 @@ const calendarReducer = (state = initialState, action) => {
       return {
         ...state,
         unixDate: action.payload.unixDate,
-        displayDate: action.payload.displayDate
       }
     case INCREMENT_DATE:
       return {
         ...state,
         unixDate: action.payload.unixDate,
-        displayDate: action.payload.displayDate
       }
     case DECREMENT_DATE:
       return {
         ...state,
         unixDate: action.payload.unixDate,
-        displayDate: action.payload.displayDate
       }
     default:
       return state;
