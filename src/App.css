@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Coiny');   
+
 body {
   margin: 0;
   padding: 0;
@@ -192,13 +194,14 @@ button.add-button {
   height: 80px;
   margin-top: -30px;
   background-color: #B37C57;
-  font-size: 60px;
+  font-size: 48px;
   font-weight: bolder;
   border: solid white 1px;
   border-radius: 50%;
   color: white;
   cursor: pointer;
   outline: none;
+  font-family: "Coiny"
 }
 
 .food-form-tabs-container {
