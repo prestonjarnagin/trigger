@@ -275,6 +275,12 @@ h4 {
   visibility: hidden;
 }
 
+#response-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 h3.close-form {
   text-decoration: underline;
   cursor: pointer;

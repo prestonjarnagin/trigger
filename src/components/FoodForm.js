@@ -19,6 +19,7 @@ class FoodForm extends Component {
     this.addFood = this.addFood.bind(this);
     this.addReaction = this.addReaction.bind(this);
     this.renderResponse = this.renderResponse.bind(this);
+    this.clearResponse = this.clearResponse.bind(this);
     this.formContainer = React.createRef();
     this.fieldsContainer = React.createRef();
     this.responseContainer = React.createRef();
@@ -33,7 +34,6 @@ class FoodForm extends Component {
 
   resetState() {
     this.setState({
-      type: 'food',
       name: '',
       time: ''
     })
@@ -73,12 +73,20 @@ class FoodForm extends Component {
     }
     this.props.createFood(food);
     this.renderResponse(this.props.foodResponse);
-    this.resetState();
   }
 
   renderResponse(response) {
-    this.fieldsContainer.current.style.visibility = "hidden";
-    this.responseContainer.current.style.visibility = "visible";
+    setTimeout(() => {
+      this.responseContainer.current.style.visibility = "visible";
+      this.fieldsContainer.current.style.visibility = "hidden";
+      this.resetState();
+    }, 200);
+  }
+
+  clearResponse() {
+    this.resetState();
+    this.responseContainer.current.style.visibility = "hidden";
+    this.fieldsContainer.current.style.visibility = "visible";
   }
 
   render() {
@@ -130,7 +138,10 @@ class FoodForm extends Component {
         </div>
         <div id="food-form-response-container" ref={this.responseContainer}>
           <h2 id="food-form-response">{this.props.foodResponse}</h2>
+          <div id="response-buttons-container">
           <h3 className="close-form" onClick={this.props.toggleDisplayAddForm}>Close</h3>
+          <h3 className="close-form" onClick={this.clearResponse}>Clear</h3>
+          </div>
         </div>
       </div>
     )
