@@ -16,20 +16,18 @@ export const createFood = (foodData) => dispatch => {
 
 fetch(foodUrl, {
   method: 'POST',
-  headers: {
-    'content-type': 'application/json'
-  },
+  headers: { 'content-type': 'application/json' },
   body: JSON.stringify(foodData)
 })
   .then(response => response.json())
-  .then(response => {
+  .then(json => {
     if (!isNaN(foodData.time)) {
-      foodEntryPost(response, foodData)
-      createEntry(response, foodData)
+      foodEntryPost(json, foodData)
+      addStatus(json, foodData)
       return foodData
     }
     else {
-      chanceFoodData(response, foodData)
+      updateFoodData(json, foodData)
       return foodData
     }
   })
@@ -40,11 +38,9 @@ fetch(foodUrl, {
   .catch(error => dispatch({
     type: NEW_FOOD,
     payload: {
-      status: `Something went wrong ${foodData.name} couldn't be created`
+      status: `Something went wrong. ${foodData.name} couldn't be created.`
     }
-  })
-  )
-
+  }))
  }
 
 const foodEntryPost = (response, foodData) => {
@@ -63,16 +59,14 @@ const foodEntryPost = (response, foodData) => {
   .then(response => response.json())
 }
 
-const chanceFoodData = (response, foodData) => { // this method is only updating the status of the foodData variable
+const updateFoodData = (response, foodData) => { 
   foodData.id = response.id
   foodData.status = response.status
 }
 
-const createEntry = (response, foodData) => { // this method modifies the mes
-  if ((response.status === `${foodData.name} is a duplicate`)&&!isNaN(foodData.time)) {
-    response.status = `Created entry for ${foodData.name} at ${dateHelper.unixDateToTime(foodData.time)}`
-  }
-  chanceFoodData(response, foodData)
+const addStatus = (response, foodData) => { 
+  response.status = `Created entry for ${foodData.name} at ${dateHelper.unixDateToTime(foodData.time)}`
+  updateFoodData(response, foodData)
 }
 
 export const destroyFood = (foodData) => dispatch => {
