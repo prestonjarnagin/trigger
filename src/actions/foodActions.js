@@ -23,7 +23,7 @@ fetch(foodUrl, {
 })
   .then(response => response.json())
   .then(response => {
-    if (foodData.time !== "") {
+    if (!isNaN(foodData.time)) {
       foodEntryPost(response, foodData)
       createEntry(response, foodData)
       return foodData
@@ -36,8 +36,15 @@ fetch(foodUrl, {
   .then(food => dispatch({
     type: NEW_FOOD,
     payload: food
+  }))
+  .catch(error => dispatch({
+    type: NEW_FOOD,
+    payload: {
+      status: `Something went wrong ${foodData.name} couldn't be created`
+    }
   })
-  );
+  )
+
  }
 
 const foodEntryPost = (response, foodData) => {
@@ -61,8 +68,8 @@ const chanceFoodData = (response, foodData) => { // this method is only updating
   foodData.status = response.status
 }
 
-const createEntry = (response, foodData) => {
-  if (response.status === `${foodData.name} is a duplicate`) {
+const createEntry = (response, foodData) => { // this method modifies the mes
+  if ((response.status === `${foodData.name} is a duplicate`)&&!isNaN(foodData.time)) {
     response.status = `Created entry for ${foodData.name} at ${dateHelper.unixDateToTime(foodData.time)}`
   }
   chanceFoodData(response, foodData)
