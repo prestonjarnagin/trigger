@@ -78,7 +78,6 @@ export const updateFoodEntry = (foodData) => dispatch => {
       foodData.status = response.status;
       return foodData 
     })
-    .then(food => console.log(food))
     .then(food => dispatch({
       type: UPDATE_FOOD_ENTRY,
       payload: food

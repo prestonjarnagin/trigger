@@ -23,9 +23,7 @@ class Foods extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.newFood &&
-      (nextProps.newFood.time >= this.props.unixDate) &&
-      (nextProps.newFood.time < this.props.unixDate + 86400)) {
+    if (nextProps.newFood) {
       this.props.foods.push(nextProps.newFood);
     } else if (this.props.unixDate !== nextProps.unixDate) {
       this.props.fetchFoods(nextProps.unixDate);
@@ -87,7 +85,6 @@ class Foods extends Component {
       time: card.querySelector(".card-time").innerText
     }
 
-    console.log(foodData);
     this.props.updateFoodEntry(foodData);
     this.cancelDialog(event);
     this.foodsContainer.current.scrollTop = 0;
