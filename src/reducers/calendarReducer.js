@@ -1,5 +1,4 @@
 import { CHANGE_DATE, INCREMENT_DATE, DECREMENT_DATE } from '../actions/types'
-import * as dateHelper from '../helpers/date';
 
 const currentDate = () => {
   let now = new Date()

@@ -1,5 +1,4 @@
 import { CHANGE_DATE, INCREMENT_DATE, DECREMENT_DATE } from './types';
-import * as dateHelper from '../helpers/date';
 
 export const changeDate = (date = new Date()) => dispatch => {
   dispatch({
