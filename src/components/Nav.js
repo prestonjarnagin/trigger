@@ -15,6 +15,12 @@ class Nav extends Component {
     this.addForm = React.createRef();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.displayAddForm !== this.props.displayAddForm) {
+      this.addFormBackground();
+    }
+  }
+
   displayAddForm = () => {
     this.addFormBackground();
     this.props.toggleDisplayAddForm()
@@ -36,7 +42,7 @@ class Nav extends Component {
         <button className="add-button"
                 ref={this.addForm}
                 onClick={this.displayAddForm}>
-          {this.props.displayAddForm ? "X" : "+"}
+          {this.props.displayAddForm ? "x" : "+"}
         </button>
         <img className="analytics-button" src={analyticsButton} alt="analytics button" />
       </footer>

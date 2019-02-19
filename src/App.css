@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Coiny');   
+
 body {
   margin: 0;
   padding: 0;
@@ -70,9 +72,28 @@ h1 {
   margin: 0;
 }
 
+#calendar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.calendar-dates-container {
+  /* width: 80%; */
+}
+
+img.calendar-button {
+  margin: 0 10px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 5px 5px 5px #000000;
+}
+
 #calendar-container h2 {
-  margin: 0;
-  font-size: 36px;
+  margin: 8px 0;
+  font-size: 24px;
   text-align: center;
 }
 
@@ -173,13 +194,14 @@ button.add-button {
   height: 80px;
   margin-top: -30px;
   background-color: #B37C57;
-  font-size: 60px;
+  font-size: 48px;
   font-weight: bolder;
   border: solid white 1px;
   border-radius: 50%;
   color: white;
   cursor: pointer;
   outline: none;
+  font-family: "Coiny"
 }
 
 .food-form-tabs-container {
@@ -254,6 +276,17 @@ h4 {
   color: #FFFFFF;
   background-color: #B37C57;
   visibility: hidden;
+}
+
+#response-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+h3.close-form {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .delete-dialog-container {

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
 
+import Calendar from './components/Calendar';
 import Foods from './components/Foods';
 import FoodForm from './components/FoodForm';
 import Nav from './components/Nav';
-import * as dateHelper from './helpers/date';
 
 import store from './store';
 class App extends Component {
@@ -17,9 +17,7 @@ class App extends Component {
           <header>
             <h1>Trigger</h1>
           </header>
-          <section id="calendar-container">
-            <h2>{dateHelper.defaultDate()}</h2>
-          </section>
+          <Calendar />
           <Foods />
           <FoodForm />
           <Nav />

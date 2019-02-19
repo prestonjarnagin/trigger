@@ -16,15 +16,18 @@ class Foods extends Component {
     this.statusMessage = React.createRef();
   }
 
-  componentWillMount() {
-    this.props.fetchFoods();
+  componentDidMount() {
+    this.props.fetchFoods(this.props.unixDate);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.newFood &&
-      (nextProps.newFood.time >= dateHelper.dateRange.begin) &&
-      (nextProps.newFood.time <= dateHelper.dateRange.end)) {
-      this.props.foods.push(nextProps.newFood);
+      (nextProps.newFood.time >= this.props.unixDate) &&
+      (nextProps.newFood.time < this.props.unixDate + 86400)) {
+        console.log(nextProps)
+      // this.props.foods.push(nextProps.newFood);
+    } else if (this.props.unixDate !== nextProps.unixDate) {
+      this.props.fetchFoods(nextProps.unixDate);
     }
   }
 
@@ -122,13 +125,15 @@ Foods.propTypes = {
   destroyFood: PropTypes.func.isRequired,
   foods: PropTypes.array.isRequired,
   newFood: PropTypes.object,
-  status: PropTypes.string
+  status: PropTypes.string,
+  unixDate: PropTypes.number,
 }
 
 const mapStateToProps = state => ({
   foods: state.foods.items,
   newFood: state.foods.item,
-  status: state.foods.changedItem.status
+  status: state.foods.changedItem.status,
+  unixDate: state.calendar.unixDate,
 });
 
 export default connect(mapStateToProps, { fetchFoods, destroyFood })(Foods);

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createFood } from '../actions/foodActions';
 import * as dateHelper from '../helpers/date';
+import { toggleDisplayAddForm } from '../actions/foodFormActions';
 
 class FoodForm extends Component {
   constructor(props) {
@@ -18,24 +19,24 @@ class FoodForm extends Component {
     this.addFood = this.addFood.bind(this);
     this.addReaction = this.addReaction.bind(this);
     this.renderResponse = this.renderResponse.bind(this);
+    this.clearResponse = this.clearResponse.bind(this);
     this.formContainer = React.createRef();
     this.fieldsContainer = React.createRef();
     this.responseContainer = React.createRef();
+    this.foodName = React.createRef();
+    this.foodTime = React.createRef();
   }
 
-  componentWillUpdate() {
-    if (this.props.displayAddForm === false) {
-      this.setState({
-        type: 'food',
-        name: '',
-        time: '',
-        status: ''
-      })
-    }
-  }
-
+  // change this to will receive props, compare displayAddForm
   componentDidUpdate() {
-    this.toggleDisplay()
+    this.toggleDisplay();
+  }
+
+  resetState() {
+    this.setState({
+      name: '',
+      time: ''
+    })
   }
 
   toggleDisplay() {
@@ -43,8 +44,10 @@ class FoodForm extends Component {
       this.formContainer.current.style.bottom = "60px";
     } else {
       this.formContainer.current.style.bottom = "-280px";
-      this.fieldsContainer.current.style.visibility = "visible";
-      this.responseContainer.current.style.visibility = "hidden";
+      setTimeout(() => {
+        this.fieldsContainer.current.style.visibility = "visible";
+        this.responseContainer.current.style.visibility = "hidden";
+      }, 500);
     }
   }
 
@@ -66,15 +69,24 @@ class FoodForm extends Component {
     const food = {
       type: this.state.type,
       name: this.state.name,
-      time: dateHelper.hoursToUnixTime(this.state.time)
+      time: dateHelper.hoursToUnixTime(this.state.time, this.props.unixDate)
     }
     this.props.createFood(food);
-    // this.renderResponse(this.props.foodResponse);
+    this.renderResponse(this.props.foodResponse);
   }
 
   renderResponse(response) {
-    this.fieldsContainer.current.style.visibility = "hidden";
-    this.responseContainer.current.style.visibility = "visible";
+    setTimeout(() => {
+      this.responseContainer.current.style.visibility = "visible";
+      this.fieldsContainer.current.style.visibility = "hidden";
+      this.resetState();
+    }, 200);
+  }
+
+  clearResponse() {
+    this.resetState();
+    this.responseContainer.current.style.visibility = "hidden";
+    this.fieldsContainer.current.style.visibility = "visible";
   }
 
   render() {
@@ -107,6 +119,7 @@ class FoodForm extends Component {
               <input type="text"
                      name="name"
                      value={this.state.name}
+                     ref={this.foodName}
                      placeholder={namePlaceholder()}
                      onChange={this.onChange}
               />
@@ -115,6 +128,7 @@ class FoodForm extends Component {
               <input type="text"
                      name="time"
                      value={this.state.time}
+                     ref={this.foodTime}
                      placeholder="Enter Time"
                      onChange={this.onChange}
               />
@@ -123,8 +137,11 @@ class FoodForm extends Component {
           </form>
         </div>
         <div id="food-form-response-container" ref={this.responseContainer}>
-          <h3 id="food-form-response">{this.props.foodResponse}</h3>
-          <h3>Click "X" below to close.</h3>
+          <h2 id="food-form-response">{this.props.foodResponse}</h2>
+          <div id="response-buttons-container">
+          <h3 className="close-form" onClick={this.props.toggleDisplayAddForm}>Close</h3>
+          <h3 className="close-form" onClick={this.clearResponse}>Clear</h3>
+          </div>
         </div>
       </div>
     )
@@ -134,12 +151,15 @@ class FoodForm extends Component {
 FoodForm.propTypes = {
   createFood: PropTypes.func.isRequired,
   displayAddForm: PropTypes.bool,
-  foodResponse: PropTypes.string
+  foodResponse: PropTypes.string,
+  unixDate: PropTypes.number,
+  toggleDisplayAddForm: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   displayAddForm: state.foodForm.display,
-  foodResponse: state.foods.item.status
+  foodResponse: state.foods.item.status,
+  unixDate: state.calendar.unixDate,
 });
 
-export default connect(mapStateToProps, {createFood} )(FoodForm);
+export default connect(mapStateToProps, { createFood, toggleDisplayAddForm } )(FoodForm);
