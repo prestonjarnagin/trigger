@@ -78,11 +78,13 @@ class Foods extends Component {
 
   confirmUpdate = (event) => {
     let card = event.target.parentNode.parentNode.parentNode.parentNode;
+    let time = card.querySelector(".card-time").innerText
     let foodData = {
       id: card.id.split("-")[2],
       type: card.id.split("-")[0],
       name: card.querySelector(".card-name").innerText,
-      time: card.querySelector(".card-time").innerText
+      time: dateHelper.hoursToUnixTime(time, this.props.unixDate)
+      
     }
 
     this.props.updateFoodEntry(foodData);
