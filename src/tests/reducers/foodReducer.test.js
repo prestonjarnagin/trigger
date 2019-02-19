@@ -38,13 +38,6 @@ describe('Food Reducer test', () => {
   })
 
   it('should delete and item if we pass an id ', () => {
-    let foods = [
-      { id: "68",type: "food",name: "Peas",time: 15000000 },
-      { id: "69",type: "food",name: "Chocolate",time: 15000000 },
-      { id: "70",type: "food",name: "Tea",time: 15000000 },
-      { id: "71",type: "food",name: "Bread",time: 15000000 }
-            ]
-    foodReducer(undefined, {type: FETCH_FOODS, payload: foods});
 
     expect(foodReducer(undefined, {type: DESTROY_FOOD, payload: foods[0].id})).toEqual({
       items: [],
