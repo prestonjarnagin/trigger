@@ -1,4 +1,5 @@
 import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD } from '../actions/types'
+
 const initialState = {
   items: [],
   item: {},
