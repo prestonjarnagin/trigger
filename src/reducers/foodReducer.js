@@ -14,8 +14,10 @@ export default function(state = initialState, action) {
         items: action.payload
       }
     case NEW_FOOD:
+      newState.items.push(action.payload)
+      newState.items.sort((a,b) => a.attributes.time - b.attributes.time) 
       return {
-        ...state,
+        ...newState,
         item: action.payload
       }
     case DESTROY_FOOD:
