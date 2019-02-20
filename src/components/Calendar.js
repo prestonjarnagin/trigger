@@ -21,7 +21,8 @@ class Calendar extends Component {
                alt="decrement date" 
                onClick={() => decrementDate(unixDate)}/>
           <div className="calendar-dates-container">
-            <div className="date-container">
+            <div className="date-container" 
+                 onClick={() => decrementDate(unixDate)}>
               <h2>{selectedDate.prevDate.date}</h2>
               <h4>{selectedDate.prevDate.day}</h4>
             </div>
@@ -29,7 +30,8 @@ class Calendar extends Component {
               <h2>{selectedDate.currDate.date}</h2>
               <h4>{selectedDate.currDate.day}</h4>
             </div>
-            <div className="date-container">
+            <div className="date-container"
+                 onClick={() => incrementDate(unixDate)}>
               <h2>{selectedDate.nextDate.date}</h2>
               <h4>{selectedDate.nextDate.day}</h4>
             </div>

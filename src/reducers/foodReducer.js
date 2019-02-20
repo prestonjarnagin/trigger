@@ -1,10 +1,12 @@
-import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD } from '../actions/types'
+import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD, UPDATE_FOOD_ENTRY } from '../actions/types'
 const initialState = {
   items: [],
   item: {},
   changedItem: {}
 }
 export default function(state = initialState, action) {
+  let newState = state;
+
   switch (action.type) {
     case FETCH_FOODS:
       return {
@@ -17,7 +19,6 @@ export default function(state = initialState, action) {
         item: action.payload
       }
     case DESTROY_FOOD:
-      let newState = state;
       newState.items = state.items.filter(food => {
         return food.id !== action.payload.id;
       })
@@ -26,7 +27,15 @@ export default function(state = initialState, action) {
         ...newState,
         changedItem: action.payload
       }
+    case UPDATE_FOOD_ENTRY:
+      newState.items = state.items.map(food => {
+        return food.id === action.payload.id ? action.payload : food
+      }).sort((a, b) => a.time - b.time )
 
+      return {
+        ...newState,
+        changedItem: action.payload
+      }
     default:
      return state;
 
