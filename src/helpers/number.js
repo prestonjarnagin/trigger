@@ -1,4 +1,4 @@
-export const toPercentage = (string) => {
-  let number = (parseInt(string) * 100).toString + " %"
-  return number
+export const toPercentage = (number) => {
+  let percentage = (number * 100).toString() + "%"
+  return percentage
 }
