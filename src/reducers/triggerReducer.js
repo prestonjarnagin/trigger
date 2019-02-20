@@ -3,7 +3,7 @@ import { FETCH_TRIGGER } from '../actions/types'
 const initialState = {
   name: '',
   items: [],
-  occurences: {},
+  occurrences: {},
   // message: ''
 }
 
@@ -15,7 +15,7 @@ export default function(state = initialState, action) {
         ...state,
         name: action.payload.name,
         items: action.payload.foods,
-        occurences: action.payload.occurences,
+        occurrences: action.payload.occurences,
         // message: action.payload.message // haven't decieded if it going to be implemented
       }
 

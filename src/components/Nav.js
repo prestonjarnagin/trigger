@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toggleDisplayAddForm } from '../actions/foodFormActions';
+import { toggleDisplayAddForm, toggleDisplayAnalytics } from '../actions/navActions';
 import homeButton from "../images/home.svg";
 import analyticsButton from "../images/analytics.svg";
 
@@ -34,28 +34,45 @@ class Nav extends Component {
       button.style = "background-color: red";
   }
 
+  displayAnalytics = () => {
+    // toggle Nav buttons
+    this.props.toggleDisplayAnalytics()
+  }
+
+
+
   render() {
 
     return (
       <footer>
-        <img className="home-button" src={homeButton} alt="home button" />
+        <img className="home-button" 
+             src={this.props.displayAnalytics ?
+                  homeButton : 
+                  analyticsButton} 
+             alt="toggle home and analytics button"
+             onClick={this.displayAnalytics} />
         <button className="add-button"
                 ref={this.addForm}
                 onClick={this.displayAddForm}>
           {this.props.displayAddForm ? "x" : "+"}
         </button>
-        <img className="analytics-button" src={analyticsButton} alt="analytics button" />
+        <img className="analytics-button" 
+             src={analyticsButton} 
+             alt="analytics button"
+             onClick={this.displayAnalytics} />
       </footer>
     )
   }
 }
 
 Nav.propTypes = {
-  toggleDisplayAddForm: PropTypes.func.isRequired
+  toggleDisplayAddForm: PropTypes.func.isRequired,
+  toggleDisplayAnalytics: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  displayAddForm: state.foodForm.display,
+  displayAddForm: state.nav.displayAddForm,
+  displayAnalytics: state.nav.displayAnalytics,
 });
 
-export default connect(mapStateToProps, { toggleDisplayAddForm })(Nav);
+export default connect(mapStateToProps, { toggleDisplayAddForm, toggleDisplayAnalytics })(Nav);
