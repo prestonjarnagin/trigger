@@ -1,6 +1,11 @@
-import { FETCH_TRIGGER } from '../actions/types'
+import { FETCH_TRIGGERS, 
+         FETCH_CURRENT_TRIGGER,
+         INCREMENT_CURRENT_TRIGGER,
+         DECREMENT_CURRENT_TRIGGER } from '../actions/types'
 
 const initialState = {
+  triggers: [],
+  currentTrigger: 0,
   name: '',
   items: [],
   occurrences: {},
@@ -10,16 +15,30 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
 
-    case FETCH_TRIGGER:
+    case FETCH_TRIGGERS:
+      return {
+        ...state,
+        triggers: action.payload
+      }
+    case FETCH_CURRENT_TRIGGER:
       return {
         ...state,
         name: action.payload.name,
         items: action.payload.foods,
-        occurrences: action.payload.occurences,
+        occurrences: action.payload.occurrences,
         // message: action.payload.message // haven't decieded if it going to be implemented
       }
-
+    case INCREMENT_CURRENT_TRIGGER:
+      return {
+        ...state,
+        currentTrigger: action.payload.currentTrigger,
+      }
+    case DECREMENT_CURRENT_TRIGGER:
+      return {
+        ...state,
+        currentTrigger: action.payload.currentTrigger,
+      }
     default:
-    return state;
+      return state;
   }
 }

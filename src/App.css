@@ -215,7 +215,10 @@ footer img {
   margin: 6px;
   cursor: pointer;
   border-radius: 50%;
-  box-shadow: 5px 5px 5px #000000;  
+  box-shadow: 5px 5px 5px #000000; 
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 button.add-button {

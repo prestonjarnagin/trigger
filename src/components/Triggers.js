@@ -2,30 +2,62 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as numberHelper from '../helpers/number';
-import { fetchTrigger } from '../actions/triggerActions';
 import leftButton from "../images/left.svg";
 import rightButton from "../images/right.svg";
+import { fetchTriggers, 
+         fetchCurrentTrigger,
+         incrementCurrentTrigger,
+         decrementCurrentTrigger } from '../actions/triggerActions';
 
 class Triggers extends Component {
   constructor(props) {
     super(props)
     this.analyticsContainer = React.createRef();
+    this.incrementButton = React.createRef();
+    this.decrementButton = React.createRef();
+    this.incrementCurrentTrigger = this.incrementCurrentTrigger.bind(this);
+    this.decrementCurrentTrigger = this.decrementCurrentTrigger.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchTrigger();
+    this.props.fetchTriggers();
+    setTimeout(() => {
+      if (this.props.triggers.length < 2) {
+        this.disableScroll()
+      }
+      this.props.fetchCurrentTrigger(this.props.triggers[this.props.currentTrigger].id);
+    }, 2000);
   }
 
   componentDidUpdate() {
     this.toggleDisplay();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.currentTrigger !== this.props.currentTrigger) {
+      this.props.fetchCurrentTrigger(this.props.triggers[nextProps.currentTrigger].id);
+    }
+  }
+
   toggleDisplay() {
-    if(this.props.displayAnalytics) {
+    if(this.props.displayAnalytics) { 
       this.analyticsContainer.current.style.visibility = "visible"
     } else {
       this.analyticsContainer.current.style.visibility = "hidden"
     }
+  }
+
+  incrementCurrentTrigger() {
+    this.props.incrementCurrentTrigger(this.props.currentTrigger, this.props.triggers.length)
+  }
+  
+  decrementCurrentTrigger() {
+    this.props.decrementCurrentTrigger(this.props.currentTrigger, this.props.triggers.length)
+  }
+
+  disableScroll() {
+    this.incrementButton.visibility = "hidden";
+    this.decrementButton.visibility = "hidden";
   }
   
   render () {
@@ -52,7 +84,7 @@ class Triggers extends Component {
         </div>
         <div className="occurrence">
           <h5 className="occurrences-title">Last month</h5>
-          <h5 className="occurrences-value">{this.props.last_31_to_60_days}</h5>
+          <h5 className="occurrences-value">{this.props.occurrences.last_31_to_60_days}</h5>
         </div>
       </div>
     )
@@ -67,14 +99,18 @@ class Triggers extends Component {
       <div id="triggers-component-container" ref={this.analyticsContainer}>
         <div id="trigger-name-container">
           <img src={leftButton}
+            ref={this.decrementButton}
             className="calendar-button"
-            alt="decrement date" />
+            alt="decrement trigger" 
+            onClick={this.decrementCurrentTrigger} />
           <div className="calendar-dates-container">
             {triggerName}
           </div>
           <img src={rightButton}
+            ref={this.incrementButton}
             className="calendar-button"
-            alt="increment date" />
+            alt="increment trigger"
+            onClick={this.incrementCurrentTrigger} />
         </div>
         <div id="triggers-container-main">
           <div id="trigger-occurrences-container">
@@ -94,11 +130,14 @@ class Triggers extends Component {
 }
 
 Triggers.propTypes = {
-  fetchTrigger: PropTypes.func.isRequired,
+  fetchTriggers: PropTypes.func.isRequired,
+  fetchCurrentTrigger: PropTypes.func.isRequired,
   foods: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,
   occurrences: PropTypes.object.isRequired,
   displayAnalytics: PropTypes.bool,
+  triggers: PropTypes.array,
+  currentTrigger: PropTypes.number
 
 }
 
@@ -107,6 +146,11 @@ const mapStateToProps = state => ({
   name: state.trigger.name,
   occurrences: state.trigger.occurrences,
   displayAnalytics: state.nav.displayAnalytics,
+  triggers: state.trigger.triggers,
+  currentTrigger: state.trigger.currentTrigger
 })
 
-export default connect(mapStateToProps, { fetchTrigger })(Triggers);
+export default connect(mapStateToProps, { fetchTriggers, 
+                                          fetchCurrentTrigger,
+                                          incrementCurrentTrigger,
+                                          decrementCurrentTrigger })(Triggers);
