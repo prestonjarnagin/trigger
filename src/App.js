@@ -6,6 +6,7 @@ import Calendar from './components/Calendar';
 import Foods from './components/Foods';
 import FoodForm from './components/FoodForm';
 import Nav from './components/Nav';
+import Triggers from './components/Triggers';
 
 import store from './store';
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
           <header>
             <h1>Trigger</h1>
           </header>
+          <Triggers />
           <Calendar />
           <Foods />
           <FoodForm />

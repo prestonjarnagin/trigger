@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import foodReducer from './foodReducer';
-import foodFormReducer from './foodFormReducer';
+import navReducer from './navReducer';
 import calendarReducer from './calendarReducer';
+import triggerReducer from './triggerReducer';
 
 export default combineReducers({
   foods: foodReducer,
-  foodForm: foodFormReducer,
+  nav: navReducer,
   calendar: calendarReducer,
+  trigger: triggerReducer
 });

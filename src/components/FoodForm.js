@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createFood } from '../actions/foodActions';
 import * as dateHelper from '../helpers/date';
-import { toggleDisplayAddForm } from '../actions/foodFormActions';
+import { toggleDisplayAddForm } from '../actions/navActions';
 
 class FoodForm extends Component {
   constructor(props) {
@@ -157,7 +157,7 @@ FoodForm.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  displayAddForm: state.foodForm.display,
+  displayAddForm: state.nav.displayAddForm,
   foodResponse: state.foods.item.status,
   unixDate: state.calendar.unixDate,
 });
