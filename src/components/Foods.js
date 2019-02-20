@@ -23,7 +23,7 @@ class Foods extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.newFood) {
+    if (nextProps.newFood.attributes) {
       this.props.foods.push(nextProps.newFood);
     } else if (this.props.unixDate !== nextProps.unixDate) {
       this.props.fetchFoods(nextProps.unixDate);
