@@ -17,7 +17,6 @@ describe('Calendar Reducer test', () => {
 
     expect(calendar(undefined, {type: 'unknown'})).toEqual({
       unixDate: Date.parse(defaultDate())/1000,
-      displayDate: defaultDate()
     })
   })
 
@@ -25,9 +24,8 @@ describe('Calendar Reducer test', () => {
     let unixTime: 0;
     let date = "January 1, 1970"
 
-    expect(calendar(undefined, {type: CHANGE_DATE , payload: {unixDate: unixTime, displayDate:date}})).toEqual({
-      unixDate: unixTime,
-      displayDate: date
+    expect(calendar(undefined, {type: CHANGE_DATE , payload: {unixDate: unixTime}})).toEqual({
+      unixDate: unixTime
     })
   })
 
@@ -35,9 +33,8 @@ describe('Calendar Reducer test', () => {
     let unixTime = currentDate + 86400
     let date = "February 19, 2019";
 
-    expect(calendar(undefined, {type: INCREMENT_DATE , payload: {unixDate: unixTime, displayDate: date }})).toEqual({
-      unixDate: unixTime,
-      displayDate: date
+    expect(calendar(undefined, {type: INCREMENT_DATE , payload: {unixDate: unixTime }})).toEqual({
+      unixDate: unixTime
     })
   })
 
@@ -45,9 +42,8 @@ describe('Calendar Reducer test', () => {
     let unixTime =  currentDate - 86400
     let date = "February 17, 2019"
 
-    expect(calendar(undefined, {type: DECREMENT_DATE , payload: {unixDate: unixTime, displayDate:date}})).toEqual({
-      unixDate: unixTime,
-      displayDate: date
+    expect(calendar(undefined, {type: DECREMENT_DATE , payload: {unixDate: unixTime}})).toEqual({
+      unixDate: unixTime
     })
   })
 })
