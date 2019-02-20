@@ -14,6 +14,7 @@ class Foods extends Component {
     this.deleteDialog = this.deleteDialog.bind(this);
     this.cancelDialog = this.cancelDialog.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this);
+    this.closeStatus = this.closeStatus.bind(this);
     this.foodsContainer = React.createRef();
     this.statusMessage = React.createRef();
   }
@@ -23,9 +24,7 @@ class Foods extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.newFood.attributes) {
-      this.props.foods.push(nextProps.newFood);
-    } else if (this.props.unixDate !== nextProps.unixDate) {
+    if (this.props.unixDate !== nextProps.unixDate) {
       this.props.fetchFoods(nextProps.unixDate);
     }
   }
@@ -106,7 +105,13 @@ class Foods extends Component {
 
     this.props.destroyFood(foodData);
     this.foodsContainer.current.scrollTop = 0;
-    this.statusMessage.current.style.display = "block";
+    this.statusMessage.current.style.display = "flex";
+  }
+
+  closeStatus = (event) => {
+    let card = event.target.parentNode;
+
+    card.style.display = "none"
   }
 
   render() {
@@ -168,6 +173,10 @@ class Foods extends Component {
       <div id="day-summary-container" ref={this.foodsContainer}>
         <div className="card-container status" ref={this.statusMessage}>
           <h5 id="foods-status">{this.props.status}</h5>
+          <img src={deleteButton}
+            className="delete-card close-status"
+            alt="close status message"
+            onClick={event => this.closeStatus(event)} />  
         </div>
         {foodItems}
       </div>

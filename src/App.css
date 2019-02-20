@@ -153,7 +153,12 @@ img.calendar-button {
 
 .card-container.status {
   display: none;
+  flex-direction: row;
   background-color: #3C455C;
+}
+
+.card-container.status h5 {
+  width: 92%;
 }
 
 #foods-status {
