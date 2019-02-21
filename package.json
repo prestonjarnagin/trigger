@@ -1,5 +1,12 @@
 {
   "name": "trigger",
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js}",
+      "!<rootDir>/src/serviceWorker.js",
+      "!<rootDir>/src/store.js"
+    ]
+  },
   "version": "0.1.0",
   "private": true,
   "homepage": "https://diazblack.github.io/trigger/",
