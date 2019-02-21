@@ -6,5 +6,18 @@ cache:
     - node_modules
 script:
   - npm run build
-on:
-  branch: master
+brances:
+  only:
+  - master
+cache:
+  - node modules
+before_install:
+  - npm update
+install:
+  - npm install
+script:
+  - npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure:
