@@ -88,10 +88,10 @@ class Nav extends Component {
              className="help-container"
              ref={this.homeHelp} >
           <h3>Foods and Reactions</h3>
-          <p>This page displays foods and reactions that were added for the selected date.
+          <p>This page displays foods (indicated by gray background) and reactions (indicated by brown background) that were added for the selected date.
           You can change the selected date by clicking the arrow buttons above or by clicking on the previous or next date, indicated by an underline.</p>
           <h4>Updating and Deleting</h4>
-          <p>You can delete any food (indicated by gray background) or reaction (indicated by red background) by clicking the X button next to the name of the food or reaction.
+          <p>You can delete any food or reaction by clicking the X button next to the name of the food or reaction.
           The name and time for a food or reaction can be updated by clicking the pencil icon.</p>
           <h4>Adding Foods and Reactions</h4>
           <p>Click the green + button below to add a food or reaction.  Select Food or Reaction, enter the name and time, and click Submit.  
