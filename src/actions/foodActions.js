@@ -56,7 +56,7 @@ const foodPost = (foodData) => {
     body: JSON.stringify(foodData)
   })
     .then(response => response.json())
-    .then(json => { 
+    .then(json => {
       foodData.typeId = json.id;
       return foodData;
      })
@@ -92,10 +92,11 @@ const foodEntryPatch = (foodData) => {
     })
   })
     .then(response => response.json())
-    .then(json => { 
+    .then(json => {
       foodData.status = json.status
       return foodData
     })
+    //.catch(error => (c))
 }
 
 const preparePayload = (foodData) => {
@@ -110,4 +111,3 @@ const preparePayload = (foodData) => {
     }
   }
 }
-

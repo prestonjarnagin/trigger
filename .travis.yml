@@ -4,7 +4,19 @@ node_js:
 cache:
   directories:
     - node_modules
+before_script:
+  - echo 'America/Denver' | sudo tee /etc/timezone
+  - sudo dpkg-reconfigure --frontend noninteractive tzdata
 script:
   - npm run build
-on:
-  branch: master
+brances:
+  only:
+  - master
+cache:
+  - node modules
+before_install:
+  - npm update
+install:
+  - npm install
+script:
+  - npm test

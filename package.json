@@ -1,5 +1,12 @@
 {
   "name": "trigger",
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js}",
+      "!<rootDir>/src/serviceWorker.js",
+      "!<rootDir>/src/store.js"
+    ]
+  },
   "version": "0.1.0",
   "private": true,
   "homepage": "https://diazblack.github.io/trigger/",
@@ -14,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -29,6 +36,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.9.1",
     "gh-pages": "^2.0.1"
   }
 }
