@@ -17,7 +17,3 @@ install:
   - npm install
 script:
   - npm test
-deploy:
-  provider: heroku
-  api_key:
-    secure:
