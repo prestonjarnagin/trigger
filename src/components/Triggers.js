@@ -59,11 +59,12 @@ class Triggers extends Component {
   }
   
   render () {
-    const triggers = this.props.foods.map(food => (
-      <div key={food.id} className="potential-triggers">
-        <h5 className="trigger-name">{food.name}</h5>
-        <h5 className="trigger-frequency">{numberHelper.toPercentage(food.frequency)}</h5>
-      </div>
+    const triggers = this.props.foods.filter(food => food.frequency >= 0.5)
+      .map(food => (
+        <div key={food.id} className="potential-triggers">
+          <h5 className="trigger-name">{food.name}</h5>
+          <h5 className="trigger-frequency">{numberHelper.toPercentage(food.frequency)}</h5>
+        </div>
     ))
 
     const occurrences = (

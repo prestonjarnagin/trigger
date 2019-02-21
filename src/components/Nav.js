@@ -116,7 +116,8 @@ class Nav extends Component {
           <h4>Potential Triggers</h4>
           <p>A potential trigger is a food that was added within the 24-hour period preceding a reaction.  
           These foods are sorted by frequency.  
-          Frequency is calculated based on the number of times the food preceded the reaction, divided by the number of times the food was eaten overall.</p>
+          Frequency is calculated based on the number of times the food preceded the reaction, divided by the number of times the food was eaten overall.
+          Foods with a frequency less than 50% are not displayed.</p>
         </div>
       </div>
     )
