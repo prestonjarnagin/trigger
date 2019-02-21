@@ -1,70 +1,104 @@
+[![Build Status](https://travis-ci.com/Diazblack/trigger.svg?branch=master)](https://travis-ci.com/Diazblack/trigger)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/prestonjarnagin/trigger_backend.svg?columns=all)](https://waffle.io/prestonjarnagin/trigger_backend)
+[![Heroku](https://heroku-badge.herokuapp.com/?trigger-105=heroku-badge)]
+
 # Trigger
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+The application was designed to help users track possible triggers of you common health conditions. Users can add foods and reactions, logging them by day and time using a simple user interface.  By tapping on the days or arrows in the date navigator, the user can go to previous days and view foods consumed and past reactions.  Also, the analytics page will give the user useful information about possible triggers sorted by frequency and likelihood of being connected to the condition.    
 
-## Available Scripts
+## Initial Setup
 
-In the project directory, you can run:
+These instructions will get a copy of the project up and running on your local machine for development and testing purposes.
+
+From GitHub clone down repository using the following commands in terminal:
+
+    git clone git@github.com:Diazblack/trigger.git
+    cd trigger
+
+## How to Use
+
+In the project directory run:
+
+### `npm install`
+
+To install all the dependencies.
+
+### Running the Server Locally
 
 ### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Runs the app in the development mode, to view it in the browser click the link bellow:
+[http://localhost:3000](http://localhost:3000).
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner, after the test suite run it will display the coverage.
 
-### `npm run build`
+### Home Page
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+When a user first visits the page, they see an index of foods and reactions for the current day, sorted by time. The grey background represents the food items and the brown background represents the reactions. The user can scroll through dates using the icons on the date navigator or by clicking on the date.  When the selected date is changed, the page will populate with the items of the particular date.  
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+![homepage](screenshots/home-page.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Adding new Foods or Reactions
+When a user taps on the green `+` button at the bottom of the page, a form will emerge where the user can choose between foods or reactions, enter a name, add the time when the food was consumed and click submit to add the item to the current date displayed on the center of the date navigator.
 
-### `npm run eject`
+![Add Food](screenshots/add-form-reactions.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+__Note:__ the time should be added in the format `hh:mm PM`(10:00 AM). Also, if the user wants to add the item to a  different date, they should first navigate to that date using the date navigator before attempting to add an item for that date.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Add Reaction](screenshots/add-form-2.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Editing Foods and Reactions
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Next to each food or reaction, the user will see an edit button (pencil icon) that allows them to update the information in the entry. When the button is tapped, a form will display with the name and time, allowing them to change either field. In order to save the changes the user clicks the save button. If the user decides not the proceed with the changes, they can tap the cancel button, leaving the item in the previous state.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![Edit Item](screenshots/update.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Deleting Foods or Reactions
+A user can click on the delete button (`X` icon) next to each item to delete the entry.  When the icon is clicked, two new buttons will appear and the user can click on cancel or on delete to proceed with the changes.
 
-### Code Splitting
+![Delete Food](screenshots/delete.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+#### Analytics
 
-### Analyzing the Bundle Size
+In the bottom left corner of the app is the analytics button (graph icon). When the icon is tapped, the the page will display the analytics information for all reactions added by the user.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+![Analytics](screenshots/scroll-date.png)
 
-### Making a Progressive Web App
+When the analytics is displayed, the user can scroll through the different reactions (displayed at the top of the screen) using the arrows on the sides. Below, the app will display the occurrences of the reaction in different periods of time. Also below, the user will see a scrolling component with the potential triggers. A frequency percentage is displayed for each potential trigger, indicating the likelihood that the food is related to the reaction, relative to other foods. At the bottom right corner of the page there is an help button (`?` icon) that will display relevant information about the analytics page when clicked.  
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+__Note:__ The information displayed in this app are not medical opinions.  Consult your doctor for professional advice related to any medical condition.
 
-### Advanced Configuration
+![Analytics Page](screenshots/analytics.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## Production and Services
 
-### Deployment
+A link to the backend app can be found with the documentation [here](https://github.com/prestonjarnagin/trigger_backend).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+The link of the application on Production can be found [here](https://trigger-105.herokuapp.com/).
 
-### `npm run build` fails to minify
+## Core Contributors
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Front End Creators
+* Cesar Jolibois - Github: [Diazblack](https://github.com/Diazblack)
+* Michael Gatewood - Github: [mngatewood](https://www.github.com/mngatewood)
+
+### Back End Creators
+* Quinn krug - Github: [Q-Win](https://github.com/Q-Win)
+* Preston Jarnagin - Github: [prestonjarnagin](https://www.github.com/prestonjarnagin)
+
+
+## To Contribute
+
+Fork and clone this repository. If you generate a pull request,  we can start a discussion about of the feature you build or you can contact us in the links above.   
+
+## Built With
+
+* [JavaScript](https://www.javascript.com/)
+* [React](https://reactjs.org/)
+* [Redux](https://redux.js.org/)
+* [Enzyme](https://github.com/airbnb/enzyme)
