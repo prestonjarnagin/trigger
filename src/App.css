@@ -440,3 +440,19 @@ h5.trigger-name {
   overflow: scroll;
 }
 
+.help-container {
+  display: none;
+  position: fixed;
+  padding: 16px;
+  margin-left: -40%;
+  top: 175px;
+  left: 50%;
+  width: calc(80% - 32px);
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  z-index: 100;
+}
+
+.help-container h2 {
+  text-align: center;
+}

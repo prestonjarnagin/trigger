@@ -19,14 +19,10 @@ class Triggers extends Component {
     this.decrementCurrentTrigger = this.decrementCurrentTrigger.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchTriggers();
-    setTimeout(() => {
-      if (this.props.triggers.length < 2) {
-        this.disableScroll()
-      }
-      this.props.fetchCurrentTrigger(this.props.triggers[this.props.currentTrigger].id);
-    }, 2000);
+  async componentDidMount() {
+    await this.props.fetchTriggers();
+    await this.props.fetchCurrentTrigger(this.props.triggers[this.props.currentTrigger].id);
+    await this.disableScroll(this.props.triggers.length)
   }
 
   componentDidUpdate() {
@@ -55,9 +51,11 @@ class Triggers extends Component {
     this.props.decrementCurrentTrigger(this.props.currentTrigger, this.props.triggers.length)
   }
 
-  disableScroll() {
-    this.incrementButton.visibility = "hidden";
-    this.decrementButton.visibility = "hidden";
+  disableScroll(triggersLength) {
+    if(triggersLength < 2) {
+      this.incrementButton.current.visibility = "hidden";
+      this.decrementButton.current.visibility = "hidden";
+    }
   }
   
   render () {
