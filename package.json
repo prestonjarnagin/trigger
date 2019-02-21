@@ -4,7 +4,8 @@
     "collectCoverageFrom": [
       "src/**/*.{js}",
       "!<rootDir>/src/serviceWorker.js",
-      "!<rootDir>/src/store.js"
+      "!<rootDir>/src/store.js",
+      "!<rootDir>/src/index.js"
     ]
   },
   "version": "0.1.0",
