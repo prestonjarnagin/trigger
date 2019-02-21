@@ -1,4 +1,5 @@
 import { FETCH_FOODS, NEW_FOOD, DESTROY_FOOD, UPDATE_FOOD_ENTRY } from './types';
+import * as dateHelper from '../helpers/date'
 
 export const fetchFoods = (date) => dispatch =>  {
   fetch(`https://trigger-backend.herokuapp.com/api/v1/day_summary?date=${date}`)
@@ -75,7 +76,11 @@ const foodEntryPost = (foodData) => {
   })
   .then(response => response.json())
   .then(json => {
-    foodData.status = json.status;
+    let unixTime = json.status.split(" ").pop()
+    let time = dateHelper.unixDateToTime(unixTime)
+    let message = json.status.split(" ").slice(0, -1).join(" ") + " " + time;
+
+    foodData.status = message;
     return foodData
   })
 }
@@ -96,7 +101,6 @@ const foodEntryPatch = (foodData) => {
       foodData.status = json.status
       return foodData
     })
-    //.catch(error => (c))
 }
 
 const preparePayload = (foodData) => {

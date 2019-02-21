@@ -34,13 +34,15 @@ export const unixDateToTime = (unixDate) => {
   let date = new Date(unixDate * 1000)
   let hours = date.getHours();
   let minutes = "0" + date.getMinutes();
-
+  console.log(hours, minutes)
   return convert24HourTime(hours, minutes.substr(-2))
 }
 
 export function convert24HourTime(hours, minutes) {
   if (hours > 12) {
     return (hours - 12) + ":" + minutes + " PM"
+  } else if (hours === 12) {
+    return 12 + ":" + minutes + " PM"
   } else {
     return hours + ":" + minutes + " AM"
   }
@@ -52,8 +54,9 @@ export const hoursToUnixTime = (hourString, selectedDate) => {
   let halfDay = trimTime.slice(-2).toLowerCase();
   let minutes = parseInt(trimTime.slice(count-4, count-2));
   let hours = convertHours(trimTime, count, halfDay);
+  
   let unixTime = selectedDate + (hours * 3600) + ( minutes * 60);
-
+  console.log(unixTime)
   return unixTime;
 }
 
@@ -65,7 +68,7 @@ export function convertHours(trimTime, count, halfDay) {
   else if (count === 7) {
     hours = parseInt(trimTime.slice(0,2));
   }
-  if (halfDay === "pm") hours = hours + 12;
+  if (halfDay === "pm" && hours < 12) hours = hours + 12;
 
   return hours
 }
