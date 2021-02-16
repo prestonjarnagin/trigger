@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.com/Diazblack/trigger.svg?branch=master)](https://travis-ci.com/Diazblack/trigger)
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/prestonjarnagin/trigger_backend.svg?columns=all)](https://waffle.io/prestonjarnagin/trigger_backend)
 [![Heroku](https://heroku-badge.herokuapp.com/?trigger-105=heroku-badge)]
 
 # Trigger
