@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/Diazblack/trigger.svg?branch=master)](https://travis-ci.com/Diazblack/trigger)
-[![Heroku](https://heroku-badge.herokuapp.com/?trigger-105=heroku-badge)]
+![Heroku](https://heroku-badge.herokuapp.com/?trigger-105=heroku-badge)
 
 # Trigger
 
